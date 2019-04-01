@@ -892,6 +892,13 @@ public:
       // return the conversion result
       return ADC->ADC_CDR[ channel ] & 0x0000'0FFF;
    }
+   /// refresh adc reading
+   ///
+   /// This function needs to be here since it's parent has a refresh virtual function.
+   /// The adc implementation seems to work without this function
+   void refresh(){
+
+   }
 };
 
 /// the number of ticks per us
