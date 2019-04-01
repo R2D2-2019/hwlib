@@ -895,7 +895,7 @@ public:
    /// refresh adc reading
    ///
    /// This function needs to be here since it's parent has a refresh virtual function.
-   /// The adc implementation seems to work without this function
+   /// The adc implementation seems to work with an empty function
    void refresh(){
 
    }
