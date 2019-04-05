@@ -5,90 +5,74 @@
 
 namespace hwlib {
 /// A pin_in_out for testing purposes
-class pin_in_out_test : public pin_in_out {
-protected:
-    bool value = false;
-    bool is_input = true;
+    class pin_in_out_test : public pin_in_out {
+    protected:
+        bool value = false;
+        bool is_input = true;
 
-    buffering buf = buffering::unbuffered;
+    public:
+        void direction_set_input() override {
+            is_input = true;
+        }
 
-public:
-    void set( bool value, buffering buf = buffering::unbuffered ) override {
-        this->value = value;
-        this->buf = buf;
-    }
+        bool read() override {
+            return value;
+        }
 
-    bool get( buffering buf = buffering::unbuffered ) override {
-        this->buf = buf;
+        void refresh() override {}
 
-        return value;
-    }
+        void direction_set_output() override {
+            is_input = false;
+        }
 
-    void direction_set_input() override {
-        is_input = true;
-    }
+        void direction_flush() override {}
 
-    void direction_set_output() override {
-        is_input = false;
-    }
+        void write( bool value ) override {
+            this->value = value;
+        }
 
-    bool in_input_direction() const {
-        return is_input;
-    }
+        void flush() override {}
 
-    bool in_output_direction() const {
-        return ! in_input_direction();
-    }
+        bool in_input_direction() const {
+            return is_input;
+        }
 
-    buffering buffered_with() const {
-        return buf;
-    }
-};
+        bool in_output_direction() const {
+            return ! in_input_direction();
+        }
+    };
 
 /// A pin_in for testing purposes
-class pin_in_test : public pin_in {
-protected:
-    bool value = false;
+    class pin_in_test : public pin_in {
+    protected:
+        bool value = false;
 
-    buffering buf = buffering::unbuffered;
+    public:
+        bool read() override {
+            return value;
+        }
 
-public:
-    bool get( buffering buf = buffering::unbuffered ) override {
-        this->buf = buf;
-
-        return value;
-    }
-
-    void set_value(bool value) {
-        this->value = value;
-    }
-
-    buffering buffered_with() const {
-        return buf;
-    }
-};
+        void set_value(bool value) {
+            this->value = value;
+        }
+    };
 
 /// A pin_out for testing purposes
-class pin_out_test : public pin_out {
-protected:
-    bool value = false;
+    class pin_out_test : public pin_out {
+    protected:
+        bool value = false;
 
-    buffering buf = buffering::unbuffered;
+    public:
+        void write( bool value ) override {
+            this->value = value;
+        }
 
-public:
-    void set( bool value, buffering buf = buffering::unbuffered ) override {
-        this->value = value;
-        this->buf = buf;
-    }
+        void flush() override {}
 
-    bool get_value() const {
-        return value;
-    }
-
-    buffering buffered_with() const {
-        return buf;
-    }
-};
+        bool get_value() const {
+            return value;
+        }
+    };
 }
 
 #endif //HWLIB_HWLIB_PIN_TEST_HPP
