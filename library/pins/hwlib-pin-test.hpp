@@ -1,8 +1,6 @@
 #ifndef HWLIB_HWLIB_PIN_TEST_HPP
 #define HWLIB_HWLIB_PIN_TEST_HPP
 
-#include "hwlib-pin.hpp"
-
 namespace hwlib {
 /// A pin_in_out for testing purposes
     class pin_in_out_test : public pin_in_out {
