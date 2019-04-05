@@ -43,6 +43,7 @@
 #include "pins/hwlib-pin-all.hpp"
 #include "pins/hwlib-pin-direct.hpp"
 #include "pins/hwlib-pin-demos.hpp"
+#include "pins/hwlib-pin-test.hpp"
 
 #include "ports/hwlib-port.hpp"
 #include "ports/hwlib-port-from-port.hpp"
