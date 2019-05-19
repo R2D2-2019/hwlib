@@ -584,6 +584,19 @@ class hwspi : public hwlib::spi_bus {
          PIOA->PIO_PUDR = dwMask;
       }
 
+      /// \brief
+      /// write and reads from the hardware spi bus
+      void write_and_read( 
+         const size_t n, 
+         const uint8_t data_out[], 
+         uint8_t data_in[] 
+      ) override {
+         for (uint_fast32_t i = 0; i < n; i++) {
+               spi_write(data_out[i]);
+               data_in[i] = spi_read();
+         }
+      }
+
    public:
       /// \brief
       /// hardware spi constructor
@@ -645,27 +658,6 @@ class hwspi : public hwlib::spi_bus {
 
          // Enable SPI
          SPI0->SPI_CR = SPI_CR_SPIEN;                     
-      }
-
-      /// \brief
-      /// write and reads from the hardware spi bus
-      void write_and_read( 
-         const size_t n, 
-         const uint8_t data_out[], 
-         uint8_t data_in[] 
-      ) override{
-         for(uint_fast32_t i = 0; i < n; i++){
-               spi_write(data_out[i]);
-               data_in[i] = spi_read();
-         }
-      }
-
-      /// \brief
-      /// writes to the hardware spi bus
-      void write(const size_t n, const uint8_t data_out[]){
-         for(uint_fast32_t i = 0; i < n; i++){
-               spi_write(data_out[i]);
-         }         
       }
 };
 
