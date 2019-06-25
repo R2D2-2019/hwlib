@@ -43,7 +43,7 @@
 #include "pins/hwlib-pin-all.hpp"
 #include "pins/hwlib-pin-direct.hpp"
 #include "pins/hwlib-pin-demos.hpp"
-#include "pins/hwlib-pin-test.hpp"
+
 
 #include "ports/hwlib-port.hpp"
 #include "ports/hwlib-port-from-port.hpp"
@@ -88,5 +88,7 @@
 #include "peripherals/hwlib-glcd-5510.hpp"
 #include "peripherals/hwlib-glcd-oled.hpp"
 #include "peripherals/hwlib-matrix-keypad.hpp"
+
+#include "pins/hwlib-pin-test.hpp"
 
 #endif // HWLIB_ALL_H
