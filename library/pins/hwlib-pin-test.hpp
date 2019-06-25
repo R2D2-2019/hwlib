@@ -71,6 +71,31 @@ namespace hwlib {
             return value;
         }
     };
-}
+    
+ /// A pin_adc for testing purposes
+ /// pin value starts default at 0 value can be set using the set_pin_value function
+    class pin_adc_test : public adc {
+    protected:
+        adc_value_type pin_value = 0;
+        
+    public:
+        pin_adc_test(): adc(12) {}
+        
+        adc_value_type read(){
+            return pin_value;
+        }
+            
+        void set_pin_value(adc_value_type new_value){
+            // check max value since arduino due has an 12 bit adc max value is 4096
+            if(new_value > 4096){
+                new_value = 4096;
+            }
+            pin_value = new_value;
+        }
+        
+        void refresh(){};//needs to be implemented because pure virtual base      
+    };
+    
+};// namespace hwlib
 
 #endif //HWLIB_HWLIB_PIN_TEST_HPP
